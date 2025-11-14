@@ -1,0 +1,13 @@
+# Configuração para Firebase App Hosting
+runConfig:
+  # Variáveis de ambiente (opcional)
+  env:
+    - variable: NODE_ENV
+      value: production
+      # availability: BUILD / RUNTIME (opcional)
+
+# Firebase App Hosting irá automaticamente:
+# - Detetar package.json
+# - Executar npm install
+# - Executar npm start
+# - Servir na porta definida em process.env.PORT
