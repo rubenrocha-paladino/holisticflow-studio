@@ -46,7 +46,54 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 404 para rotas não encontradas
+  
+  
+    // Endpoint para sincronizar missions do GoHighLevel
+    if (req.method === 'GET' && req.url === '/api/ghl/appointments') {
+          const token = process.env.GHL_TOKEN;
+          const locationId = process.env.GHL_LOCATION_ID;
+      
+          if (!token || !locationId) {
+                  res.writeHead(500);
+                  res.end(JSON.stringify({ ok: false, error: 'GHL_TOKEN ou GHL_LOCATION_ID não configurado' }));
+                  return;
+                }
+      
+          // Chamar API do GoHighLevel para obter appointments
+          const https = require('https');
+          const apiUrl = `https://services.leadconnectorhq.com/calendars/events?locationId=${locationId}`;
+      
+          const options = {
+                  headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Version': '2021-07-28'
+                                    }
+                        };
+      
+          https.get(apiUrl, options, (apiRes) => {
+                  let data = '';
+            
+                  apiRes.on('data', (chunk) => {
+                            data += chunk;
+                          });
+            
+                  apiRes.on('end', () => {
+                            try {
+                                        const appointments = JSON.parse(data);
+                                        res.writeHead(200);
+                                        res.end(JSON.stringify({ ok: true, appointments }));
+                                      } catch (error) {
+                                        res.writeHead(500);
+                                        res.end(JSON.stringify({ ok: false, error: 'Erro ao processar resposta da API' }));
+                                      }
+                          });
+                }).on('error', (error) => {
+                  res.writeHead(500);
+                  res.end(JSON.stringify({ ok: false, error: error.message }));
+                });
+      
+          return;
+        }// 404 para rotas não encontradas
   res.writeHead(404);
   res.end(JSON.stringify({ ok: false, error: 'Rota não encontrada' }));
 });
