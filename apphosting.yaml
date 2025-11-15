@@ -6,12 +6,12 @@ runConfig:
       value: production
     - variable: GHL_TOKEN
       secret: GHL_TOKEN
-            availability: RUNTIME
+      availability: RUNTIME
     - variable: GHL_LOCATION_ID
-          secret: GHL_LOCATION_ID
-          availability: RUNTIME
+      secret: GHL_LOCATION_ID
+      availability: RUNTIME
 
-  # availability: BUILD / RUNTIME (opcional)
+# availability: BUILD / RUNTIME (opcional)
 
 # Firebase App Hosting irá automaticamente:
 # - Detetar package.json
