@@ -7,9 +7,10 @@ runConfig:
     - variable: GHL_TOKEN
       secret: GHL_TOKEN
             availability: RUNTIME
-    - variable: GHL_LOCATION_
+    - variable: GHL_LOCATION_ID
+          secret: GHL_LOCATION_ID
           availability: RUNTIME
-      secret: GHL_LOCATION_ID
+
   # availability: BUILD / RUNTIME (opcional)
 
 # Firebase App Hosting irá automaticamente:
