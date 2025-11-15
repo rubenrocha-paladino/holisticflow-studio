@@ -8,7 +8,7 @@ runConfig:
       secret: GHL_TOKEN
             availability: RUNTIME
     - variable: GHL_LOCATION_
-          availability: RUNTIMEID
+          availability: RUNTIME
       secret: GHL_LOCATION_ID
   # availability: BUILD / RUNTIME (opcional)
 
